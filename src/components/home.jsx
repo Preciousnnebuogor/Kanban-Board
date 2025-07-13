@@ -1,29 +1,36 @@
 import { useState } from "react";
 
 export default function InputField() {
-  const [showTextaera, setTextareaShow] = useState(false);
+  const [showTextarea, setTextareaShow] = useState(false);
   const [getText, setGetText] = useState('');
+  
 
   function handleClick() {
    setTextareaShow(true)
   }
+  function closeClick(){
+    setTextareaShow(false);
+  }
   return (
     <div>
-      <div className="input">
+      <div className="">
         <button onClick={handleClick} className="input-butt">
           Create
         </button>
-        <div>
-          {showTextaera && (
+
+        {showTextarea && (
+          <div className="sec-content">
+            <div className="icons">
+              <button onClick={closeClick}>close</button>
+              <button>Add</button>
+            </div>
             <textarea
               className="textarea"
-              onChange={(e) => {
-               return setGetText(e.target.value);
-              }}
-              value = { getText }
+              onChange={(e) => setGetText(e.target.value)}
+              value={getText}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

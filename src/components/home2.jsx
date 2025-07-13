@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 export default function Home() {
+    const [showTextarea, setTextareaShow] = useState(false);
+    const [getText, setGetText] = useState("");
   const [cardList, setCardList] = useState([
     { id: 1, text: "Card one", column: "todo" },
     // { id: 2, text: "Card two", column: "inProgress" },
@@ -36,8 +38,37 @@ export default function Home() {
     e.preventDefault(); // Allow the card to be dropped
   }
 
+  function handleClick() {
+    setTextareaShow(true);
+  }
+  function closeClick() {
+    setTextareaShow(false);
+  }
+
   return (
-    <div>
+    <div style={{ display: "flex" }}>
+      <div style={{ width: "20%", marginTop: "60px" }}>
+        <div className="">
+          <button onClick={handleClick} className="input-butt">
+            Create
+          </button>
+
+          {showTextarea && (
+            <div className="sec-content">
+              <div className="icons">
+                <button onClick={closeClick}>close</button>
+                <button>Add</button>
+              </div>
+              <textarea
+                className="textarea"
+                onChange={(e) => setGetText(e.target.value)}
+                value={getText}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="container">
         <h1 className="text-h1">Simple Kanban Board</h1>
 
