@@ -1,76 +1,79 @@
 import { useState } from "react";
 
-export default function Home2() {
-  const [currentColumn, setCurrentColumn] = useState("inProgress");
+export default function Home() {
+  const [cardList, setCardList] = useState([
+    { id: 1, text: "Card one", column: "todo" },
+    { id: 2, text: "Card two", column: "inProgress" },
+    { id: 3, text: "Card three", column: "done" },
+  ]);
 
-  function handleDragStart(e) {
-    e.dataTransfer.setData("text/plain", "card");
+  const [draggedCardId, setDraggedCardId] = useState(null);
+
+  function handleDragStart(id) {
+    setDraggedCardId(id); // Save the id of the card being dragged
   }
 
   function handleDrop(column) {
-    setCurrentColumn(column);
+    setCardList((prevCards) => {
+      return prevCards.map((card) => {
+        if (card.id === draggedCardId) {
+          // Manually update only the column of the dragged card
+          return {
+            id: card.id,
+            text: card.text,
+            column: column,
+          };
+        } else {
+          return card;
+        }
+      });
+    });
+
+    setDraggedCardId(null); // Reset after drop
   }
 
   function allowDrop(e) {
-    e.preventDefault();
+    e.preventDefault(); // Allow the card to be dropped
   }
 
   return (
-    <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
-      {/* Todo List Column */}
-      <div
-        onDragOver={allowDrop}
-        onDrop={() => handleDrop("todo")}
-        style={{
-          width: "200px",
-          height: "200px",
-          border: "2px dashed #aaa",
-          padding: "10px",
-        }}
-      >
-        <h2>Todo List</h2>
-        {currentColumn === "todo" && (
-          <div
-            draggable
-            onDragStart={handleDragStart}
-            style={{
-              background: "#f1f1f1",
-              padding: "10px",
-              borderRadius: "5px",
-              marginTop: "10px",
-            }}
-          >
-            Drag me
-          </div>
-        )}
-      </div>
+    <div>
+      <div className="container">
+        <h1 className="text-h1">Simple Kanban Board</h1>
 
-      {/* In Progress Column */}
-      <div
-        onDragOver={allowDrop}
-        onDrop={() => handleDrop("inProgress")}
-        style={{
-          width: "200px",
-          height: "200px",
-          border: "2px dashed #aaa",
-          padding: "10px",
-        }}
-      >
-        <h2>In Progress</h2>
-        {currentColumn === "inProgress" && (
-          <div
-            draggable
-            onDragStart={handleDragStart}
-            style={{
-              background: "#f1f1f1",
-              padding: "10px",
-              borderRadius: "5px",
-              marginTop: "10px",
-            }}
-          >
-            Drag me
-          </div>
-        )}
+        <div className="content">
+          {/* Loop through columns dynamically */}
+          {["todo", "inProgress", "done"].map((column) => (
+            <div
+              className="board"
+              key={column}
+              onDragOver={allowDrop}
+              onDrop={() => handleDrop(column)}
+            >
+              <h2 className="text-h2">
+                {column === "todo"
+                  ? "Todo List"
+                  : column === "inProgress"
+                  ? "In Progress"
+                  : "Done"}
+              </h2>
+
+              {/* Loop through and render only the cards that belong to this column */}
+              {cardList
+                .filter((card) => card.column === column)
+                .map((card) => (
+                  <div
+                    className="card"
+                    key={card.id}
+                    draggable="true"
+                    onDragStart={() => handleDragStart(card.id)}
+                  >
+                    {card.text}
+                  </div>
+                ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

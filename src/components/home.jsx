@@ -1,27 +1,46 @@
 import { useState } from "react";
 
 export default function Home(){
-  const [currentColumn, setCurrentColumn] =useState('Todo List')
+const [cardList, setCardList] = useState([
+  {id:1, text:"Card one", column:"todo"},
+  {id:2, text:"Card two", column:"inProgress"},
+  {id:3, text:"Card three", column:"done"},
+])
 
-  function dragStart(e){
-    e.dataTransfer.setData('text/plain','card')
+
+  const [currentCardId, setCurrentCardId] =useState(null)
+
+  function handleDrop(column){
+    setCardList((prevCards)=>{prevCards.map((card)=> {
+      if(card.id === draggedCardId){
+         return { id: card.id, text: card.text, column: column }
+        } else{
+          return card
+         }}
+    
+    )})
+    setDraggedCardId(null);
   }
  
-  function handleDrop(column){
-  setCurrentColumn(column)
-  }
+  
 
   function allowDrop (e){
     e.preventDefault()
   }
 
-  function dragOver(e  ) {} 
+
+ 
+  
     return (
       <div>
         <div className="container">
           <h1 className="text-h1">Simple Kanban Board</h1>
           <div className="content">
-            <div className="board">
+            <div className="board" >
+
+          
+
+
               <h2 className="text-h2">Todo List</h2>
               <div className="card" draggable="true">
                 come here
