@@ -3,8 +3,8 @@ import { useState } from "react";
 export default function Home() {
   const [cardList, setCardList] = useState([
     { id: 1, text: "Card one", column: "todo" },
-    { id: 2, text: "Card two", column: "inProgress" },
-    { id: 3, text: "Card three", column: "done" },
+    // { id: 2, text: "Card two", column: "inProgress" },
+    // { id: 3, text: "Card three", column: "done" },
   ]);
 
   const [draggedCardId, setDraggedCardId] = useState(null);
@@ -13,7 +13,7 @@ export default function Home() {
     setDraggedCardId(id); // Save the id of the card being dragged
   }
 
-  function handleDrop(column) {
+  function handleDrop(columnParm) {
     setCardList((prevCards) => {
       return prevCards.map((card) => {
         if (card.id === draggedCardId) {
@@ -21,7 +21,7 @@ export default function Home() {
           return {
             id: card.id,
             text: card.text,
-            column: column,
+            column: columnParm,
           };
         } else {
           return card;
@@ -43,24 +43,24 @@ export default function Home() {
 
         <div className="content">
           {/* Loop through columns dynamically */}
-          {["todo", "inProgress", "done"].map((column) => (
+          {["todo", "inProgress", "done"].map((section) => (
             <div
               className="board"
-              key={column}
+              key={section}
               onDragOver={allowDrop}
-              onDrop={() => handleDrop(column)}
+              onDrop={() => handleDrop(section)}
             >
               <h2 className="text-h2">
-                {column === "todo"
+                {section === "todo"
                   ? "Todo List"
-                  : column === "inProgress"
+                  : section === "inProgress"
                   ? "In Progress"
                   : "Done"}
               </h2>
 
               {/* Loop through and render only the cards that belong to this column */}
               {cardList
-                .filter((card) => card.column === column)
+                .filter((card) => card.column === section)
                 .map((card) => (
                   <div
                     className="card"
