@@ -50,6 +50,20 @@ body{
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgb(0, 0, 0.2);
 }
+.input-butt{
+  background-color: whitesmoke;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+}
+.textarea{
+  width: 300px;
+  height: 200px;
+  margin: 10px;
+  /* display: none; */
+}
+
+
 
 @media (max-width: 768px) {
   .content {

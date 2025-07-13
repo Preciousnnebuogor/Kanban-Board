@@ -7,8 +7,8 @@ import Home2 from './components/home2';
 function App() {
   return (
     <div className="App">
-    {/* <Home/> */}
-    <Home2/>
+    <Home/>
+    {/* <Home2/> */}
 
     </div>
   );
