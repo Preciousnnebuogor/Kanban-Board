@@ -1,4 +1,21 @@
+import { useState } from "react";
+
 export default function Home(){
+  const [currentColumn, setCurrentColumn] =useState('Todo List')
+
+  function dragStart(e){
+    e.dataTransfer.setData('text/plain','card')
+  }
+ 
+  function handleDrop(column){
+  setCurrentColumn(column)
+  }
+
+  function allowDrop (e){
+    e.preventDefault()
+  }
+
+  function dragOver(e  ) {} 
     return (
       <div>
         <div className="container">
@@ -6,6 +23,12 @@ export default function Home(){
           <div className="content">
             <div className="board">
               <h2 className="text-h2">Todo List</h2>
+              <div className="card" draggable="true">
+                come here
+              </div>
+              <div className="card" draggable="true">
+                booking for food 
+              </div>
             </div>
 
             <div className="board">
@@ -19,4 +42,4 @@ export default function Home(){
         </div>
       </div>
     );
-}
+} 

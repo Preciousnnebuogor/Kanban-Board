@@ -1,8 +1,11 @@
 *{
   box-sizing: border-box;
+  /* padding: 0;
+  margin: 0; */
 }
 body{
   background-color: white;
+  min-height: 100vh;
 }
 .container{
   display: flex;
@@ -18,10 +21,12 @@ body{
   justify-content: center;
   align-items: center;
   gap: 10px;
+  
 }
 .board{
   /* border: 1px solid black; */
   background-color: whitesmoke;
+  box-shadow: 0 4px 8px rgb(62, 52, 52);
   width: 300px;
   height: 500px;
   display: flex;
@@ -29,6 +34,25 @@ body{
   /* justify-content: center; */
   align-items: center;
 }
-.text-h2{
+.text-h2{ 
   color:rgb(62, 52, 52)
+}
+.card{
+  /* border: 1px solid black; */
+  background-color: white;
+  padding: 10px 80px;
+  box-shadow: 0 2px 4px rgb(0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: grabbing;
+  margin-bottom: 20px;
+}
+.card:active{
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgb(0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
 }
