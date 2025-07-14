@@ -4,7 +4,7 @@ export default function Home() {
     const [showTextarea, setTextareaShow] = useState(false);
     const [getText, setGetText] = useState("");
   const [cardList, setCardList] = useState([
-    { id: 1, text: "Card one", column: "todo" },
+    // { id: 1, text: "Card one", column: "todo" },
     // { id: 2, text: "Card two", column: "inProgress" },
     // { id: 3, text: "Card three", column: "done" },
   ]);
@@ -45,6 +45,21 @@ export default function Home() {
     setTextareaShow(false);
   }
 
+  function addCard() {
+   if(getText.trim() === "")return
+   const newCard = {
+    id: cardList.length + 1,
+    text: getText,
+    column: 'todo'
+   }
+   setCardList([...cardList, newCard])
+   setGetText("")
+   setTextareaShow(false);
+  }
+  function deleteButton(id){
+    setCardList(cardList.filter((card)=>card.id !== id))
+  }
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: "20%", marginTop: "60px" }}>
@@ -57,7 +72,7 @@ export default function Home() {
             <div className="sec-content">
               <div className="icons">
                 <button onClick={closeClick}>close</button>
-                <button>Add</button>
+                <button onClick={addCard}>Add</button>
               </div>
               <textarea
                 className="textarea"
@@ -73,6 +88,7 @@ export default function Home() {
         <h1 className="text-h1">Simple Kanban Board</h1>
 
         <div className="content">
+          
           {/* Loop through columns dynamically */}
           {["todo", "inProgress", "done"].map((section) => (
             <div
@@ -99,7 +115,10 @@ export default function Home() {
                     draggable="true"
                     onDragStart={() => handleDragStart(card.id)}
                   >
+                    <div className="displayCard">
                     {card.text}
+                    <button onClick={()=>deleteButton(card.id)} className="displayCard-butt">X</button>
+                    </div>
                   </div>
                 ))}
             </div>
