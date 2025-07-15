@@ -63,6 +63,7 @@ export default function Home() {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: "20%", marginTop: "60px" }}>
+        
         <div className="">
           <button onClick={handleClick} className="input-butt">
             Create
@@ -88,7 +89,6 @@ export default function Home() {
         <h1 className="text-h1">Simple Kanban Board</h1>
 
         <div className="content">
-          
           {/* Loop through columns dynamically */}
           {["todo", "inProgress", "done"].map((section) => (
             <div
@@ -116,8 +116,13 @@ export default function Home() {
                     onDragStart={() => handleDragStart(card.id)}
                   >
                     <div className="displayCard">
-                    {card.text}
-                    <button onClick={()=>deleteButton(card.id)} className="displayCard-butt">X</button>
+                      {card.text}
+                      <button
+                        onClick={() => deleteButton(card.id)}
+                        className="displayCard-butt"
+                      >
+                        X
+                      </button>
                     </div>
                   </div>
                 ))}
