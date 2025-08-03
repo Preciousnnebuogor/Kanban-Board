@@ -3,7 +3,8 @@ import { useState } from "react";
 export default function Work() {
     const [showTextarea, setTextareaShow] = useState(false);
     const [getText, setGetText] = useState("");
-    const [edit, setEdit] = useState(false)
+    const [editText, setEditText] = useState("")
+    const [editId, setEditId] = useState("")
   const [cardList, setCardList] = useState([
     // { id: 1, text: "Card one", column: "todo" },
     // { id: 2, text: "Card two", column: "inProgress" },
@@ -60,12 +61,17 @@ export default function Work() {
   function deleteButton(id){
     setCardList(cardList.filter((card)=>card.id !== id))
   }
-  function handleEdit(){
-   if(edit){
-    setEdit(true)
-   } else{
-    setEdit(false)
-   }
+  function startEdit(card){
+   setEditId(card.id)
+   setEditText(card.text)
+  }
+  function saveEdit(id){
+  if(editText.trim() === '') return
+  setCardList(
+    cardList.map((card)=>( card.id === id ?{...card, text:editText}:card))
+  )
+  setEditId('')
+  setEditText('')
   }
 
   return (
@@ -75,9 +81,9 @@ export default function Work() {
           <button onClick={handleClick} className="input-butt">
             Create
           </button>
-          <button onClick={handleEdit} className="input-butt">
+          {/* <button onClick={handleEdit} className="input-butt">
             Search
-          </button>
+          </button> */}
           <button className="input-butt">New-Board</button>
           <button></button>
 
@@ -127,15 +133,44 @@ export default function Work() {
                     draggable="true"
                     onDragStart={() => handleDragStart(card.id)}
                   >
-                    <div className="displayCard">
-                      {card.text}
+                    <div>
+                      {editId === card.id ? (
+                        <>
+                          <input
+                            type="text"
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                          />
+                          <button onClick={() => saveEdit(card.id)}>💾</button>
+                        </>
+                      ) : (
+                        <div className="displayCard">
+                          <span>{card.text}</span>
+                          <div className="displayCard2">
+                            <button
+                              onClick={() => deleteButton(card.id)}
+                              className="displayCard-butt"
+                            >
+                              ❌
+                            </button>
+                            <button
+                              onClick={() => startEdit(card)}
+                              className="displayCard-butt"
+                            >
+                              ✏️
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* {card.text}
                       <button
                         onClick={() => deleteButton(card.id)}
                         className="displayCard-butt"
                       >
                         X
                       </button>
-                      <button>✏️</button>
+                      <button>✏️</button> */}
                     </div>
                   </div>
                 ))}

@@ -90,11 +90,16 @@ body {
 .displayCard {
   display: flex;
   justify-content: space-between;
+  align-items: end;
+}
+.displayCard2{
+  display: flex;
+  /* justify-content: space-between; */
   align-items: center;
 }
 .displayCard-butt {
   margin-left: 10px;
-  background: red;
+  /* background: red; */
   color: white;
   border: none;
   border-radius: 3px;
