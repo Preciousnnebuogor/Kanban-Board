@@ -5,6 +5,7 @@ export default function Work() {
     const [getText, setGetText] = useState("");
     const [editText, setEditText] = useState("")
     const [editId, setEditId] = useState("")
+    const [newBoard, setNewBoard] = useState("")
   const [cardList, setCardList] = useState([
     // { id: 1, text: "Card one", column: "todo" },
     // { id: 2, text: "Card two", column: "inProgress" },
@@ -72,6 +73,10 @@ export default function Work() {
   )
   setEditId('')
   setEditText('')
+  }
+
+  function createBoard(){
+
   }
 
   return (
@@ -162,7 +167,11 @@ export default function Work() {
                           </div>
                         </div>
                       )}
+                       
 
+                       <div>
+                        <p>money good</p>
+                       </div>
                       {/* {card.text}
                       <button
                         onClick={() => deleteButton(card.id)}
