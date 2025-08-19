@@ -71,6 +71,7 @@ export default function Work() {
   setEditText('')
   }
 
+  // add new name to the
   function createBoard(){
     const newBoardName = `newBoard-${board.length + 1}`
     setBoard([...board, newBoardName])
@@ -86,7 +87,9 @@ export default function Work() {
           {/* <button onClick={handleEdit} className="input-butt">
             Search
           </button> */}
-          <button onClick={createBoard} className="input-butt">New-Board</button>
+          <button onClick={createBoard} className="input-butt">
+            New-Board
+          </button>
           {/* <button></button> */}
 
           {showTextarea && (
@@ -99,6 +102,7 @@ export default function Work() {
                 className="textarea"
                 onChange={(e) => setGetText(e.target.value)}
                 value={getText}
+                
               />
             </div>
           )}
@@ -110,7 +114,7 @@ export default function Work() {
 
         <div className="content">
           {/* Loop through columns dynamically */}
-          {["todo", "inProgress", "done"].map((section) => (
+          {board.map((section) => (
             <div
               className="board"
               key={section}
@@ -118,11 +122,12 @@ export default function Work() {
               onDrop={() => handleDrop(section)}
             >
               <h2 className="text-h2">
-                {section === "todo"
+                {/* {section === "todo"
                   ? "Todo List"
                   : section === "inProgress"
                   ? "In Progress"
-                  : "Done"}
+                  : "Done"} */}
+                {section}
               </h2>
 
               {/* Loop through and render only the cards that belong to this column */}
@@ -165,9 +170,6 @@ export default function Work() {
                         </div>
                       )}
 
-                      <div>
-                        <p>money good</p>
-                      </div>
                       {/* {card.text}
                       <button
                         onClick={() => deleteButton(card.id)}
@@ -181,9 +183,7 @@ export default function Work() {
                 ))}
             </div>
           ))}
-          <div>
-            <div className="board"></div>
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
