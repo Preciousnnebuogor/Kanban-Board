@@ -5,12 +5,8 @@ export default function Work() {
     const [getText, setGetText] = useState("");
     const [editText, setEditText] = useState("")
     const [editId, setEditId] = useState("")
-    const [newBoard, setNewBoard] = useState("")
-  const [cardList, setCardList] = useState([
-    // { id: 1, text: "Card one", column: "todo" },
-    // { id: 2, text: "Card two", column: "inProgress" },
-    // { id: 3, text: "Card three", column: "done" },
-  ]);
+    const [board, setBoard] = useState(["todo", "inprogress", "done"])
+  const [cardList, setCardList] = useState([]);
 
   const [draggedCardId, setDraggedCardId] = useState(null);
 
@@ -76,7 +72,8 @@ export default function Work() {
   }
 
   function createBoard(){
-
+    const newBoardName = `newBoard-${board.length + 1}`
+    setBoard([...board, newBoardName])
   }
 
   return (
@@ -89,8 +86,8 @@ export default function Work() {
           {/* <button onClick={handleEdit} className="input-butt">
             Search
           </button> */}
-          <button className="input-butt">New-Board</button>
-          <button></button>
+          <button onClick={createBoard} className="input-butt">New-Board</button>
+          {/* <button></button> */}
 
           {showTextarea && (
             <div className="sec-content">
@@ -167,11 +164,10 @@ export default function Work() {
                           </div>
                         </div>
                       )}
-                       
 
-                       <div>
+                      <div>
                         <p>money good</p>
-                       </div>
+                      </div>
                       {/* {card.text}
                       <button
                         onClick={() => deleteButton(card.id)}
@@ -185,6 +181,9 @@ export default function Work() {
                 ))}
             </div>
           ))}
+          <div>
+            <div className="board"></div>
+          </div>
         </div>
       </div>
     </div>
