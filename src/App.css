@@ -30,11 +30,17 @@ body {
   height: 500px;
   display: flex;
   flex-direction: column;
+  padding: 10px;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
 }
 .text-h2 {
   color: rgb(62, 52, 52);
+}
+.section2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .card {
   /* border: 1px solid black; */

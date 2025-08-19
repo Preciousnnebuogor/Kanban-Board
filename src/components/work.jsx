@@ -5,7 +5,7 @@ export default function Work() {
     const [getText, setGetText] = useState("");
     const [editText, setEditText] = useState("")
     const [editId, setEditId] = useState("")
-    const [board, setBoard] = useState(["todo", "inprogress", "done"])
+    const [board, setBoard] = useState(["Todo", "In-Progress", "Done"])
   const [cardList, setCardList] = useState([]);
 
   const [draggedCardId, setDraggedCardId] = useState(null);
@@ -49,7 +49,7 @@ export default function Work() {
    const newCard = {
     id: cardList.length + 1,
     text: getText,
-    column: 'todo'
+    column: 'Todo'
    }
    setCardList([...cardList, newCard])
    setGetText("")
@@ -73,8 +73,12 @@ export default function Work() {
 
   // add new name to the
   function createBoard(){
-    const newBoardName = `newBoard-${board.length + 1}`
+    const newBoardName = `NewBoard-${board.length + 1}`
     setBoard([...board, newBoardName])
+  }
+
+  function handleDeleteBoard(newBoardName){
+    setBoard(board.filter((boards) => boards !== newBoardName))
   }
 
   return (
@@ -102,7 +106,6 @@ export default function Work() {
                 className="textarea"
                 onChange={(e) => setGetText(e.target.value)}
                 value={getText}
-                
               />
             </div>
           )}
@@ -121,14 +124,17 @@ export default function Work() {
               onDragOver={allowDrop}
               onDrop={() => handleDrop(section)}
             >
-              <h2 className="text-h2">
-                {/* {section === "todo"
+              <div className="section2">
+                <h2 className="text-h2">
+                  {/* {section === "todo"
                   ? "Todo List"
                   : section === "inProgress"
                   ? "In Progress"
                   : "Done"} */}
-                {section}
-              </h2>
+                  {section}
+                </h2>
+                <button onClick={() => handleDeleteBoard(section)}>del</button>
+              </div>
 
               {/* Loop through and render only the cards that belong to this column */}
               {cardList
