@@ -191,7 +191,7 @@ export default function Work() {
                 ))}
             </div>
           ))}
-          <div>Hello world her</div>
+          <div></div>
         </div>
       </div>
     </div>
