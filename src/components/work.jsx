@@ -81,6 +81,8 @@ export default function Work() {
     setBoard(board.filter((boards) => boards !== newBoardName))
   }
 
+
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: "20%", marginTop: "60px" }}>
@@ -189,7 +191,7 @@ export default function Work() {
                 ))}
             </div>
           ))}
-          <div></div>
+          <div>Hello world her</div>
         </div>
       </div>
     </div>
